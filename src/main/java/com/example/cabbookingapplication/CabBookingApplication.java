@@ -12,19 +12,15 @@ import com.example.cabbookingapplication.dtos.responsedtos.CreateDriverResponseD
 import com.example.cabbookingapplication.dtos.responsedtos.FindRideResponseDto;
 import com.example.cabbookingapplication.enums.Availability;
 import com.example.cabbookingapplication.enums.Gender;
-import com.example.cabbookingapplication.enums.ResponseStatus;
 import com.example.cabbookingapplication.enums.VehicleType;
 import com.example.cabbookingapplication.models.Driver;
 import com.example.cabbookingapplication.models.Location;
 import com.example.cabbookingapplication.models.Ride;
-import com.example.cabbookingapplication.models.User;
 import com.example.cabbookingapplication.services.InMemoryDriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.sql.SQLOutput;
 import java.util.List;
 
 @SpringBootApplication
@@ -37,6 +33,7 @@ public class CabBookingApplication implements CommandLineRunner {
     BookingController bookingController;
     @Autowired
     InMemoryDriverService inMemoryDriverService;
+
     public static void main(String[] args) {
         SpringApplication.run(CabBookingApplication.class, args);
     }
@@ -99,6 +96,7 @@ public class CabBookingApplication implements CommandLineRunner {
         System.out.println(driverResponseDto1.getResponseStatus());
         System.out.println(driverResponseDto1.getId());
         System.out.println(driverResponseDto1.getMessage());
+        System.out.println();
 
         //2. Balu
         CreateDriverRequestDto driverRequestDto2 = new CreateDriverRequestDto();
@@ -117,6 +115,7 @@ public class CabBookingApplication implements CommandLineRunner {
         System.out.println(driverResponseDto2.getResponseStatus());
         System.out.println(driverResponseDto2.getId());
         System.out.println(driverResponseDto2.getMessage());
+        System.out.println();
 
         //3. Chandu
         CreateDriverRequestDto driverRequestDto3 = new CreateDriverRequestDto();
@@ -135,6 +134,7 @@ public class CabBookingApplication implements CommandLineRunner {
         System.out.println(driverResponseDto3.getResponseStatus());
         System.out.println(driverResponseDto3.getId());
         System.out.println(driverResponseDto3.getMessage());
+        System.out.println();
 
         //Finding rides
         //1. Able to find nearest rides
@@ -151,6 +151,7 @@ public class CabBookingApplication implements CommandLineRunner {
         for(Ride ride:rides) {
             System.out.println(i++ + " " + ride.getDriver().getName() + " " + ride.getDriver().getVehicle().getMaker() + " " + ride.getDriver().getVehicle().getModel());
         }
+        System.out.println();
 
         //Booking the nearest ride in above scenario
         BookingRequestDto bookingRequestDto = new BookingRequestDto();
@@ -159,6 +160,7 @@ public class CabBookingApplication implements CommandLineRunner {
         bookingRequestDto.setDest(findRideRequestDto1.getDest());
         bookingRequestDto.setSelectedRide(findRideResponseDto1.getNearestRides().get(0));
         bookingController.bookRide(bookingRequestDto);
+        System.out.println();
 
         //2. No available rides within specified distance scenario
         FindRideRequestDto findRideRequestDto2 = new FindRideRequestDto();
@@ -171,6 +173,7 @@ public class CabBookingApplication implements CommandLineRunner {
         if(findRideResponseDto2.getNearestRides()==null){
             System.out.println("No rides available");
         }
+        System.out.println();
 
 
         //3. Trying scenario 1 with drivers status set to not available.
